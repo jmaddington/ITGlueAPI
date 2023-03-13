@@ -4,4 +4,4 @@ docker run --rm \
   openapitools/openapi-generator-cli generate \
   -i /local/openapi.yml \
   -g python \
-  -o /local/api
+  -o /local/python/api
