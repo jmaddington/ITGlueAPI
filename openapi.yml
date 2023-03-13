@@ -84,7 +84,7 @@ paths:
       requestBody:
         description: Get a list of organizations in your account.
         content:
-          application/json:
+          application/vnd.api+json:
             schema: 
               $ref: '#/components/schemas/Organization'
       responses:
@@ -94,7 +94,6 @@ paths:
             application/vnd.api+json:
               schema:
                 type: array
-                items:
                 $ref: '#/components/schemas/Organization'
         '401':
           description: Unauthorized
