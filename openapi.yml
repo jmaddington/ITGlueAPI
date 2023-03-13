@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: IT Glue API in OpenAPI Spec
+  description: |-
+    This is the IT Glue API implemented in OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io).
+    
+    Some useful links:
+    - [Reference](https://api.itglue.com/developer/)
+
+  contact:
+    email: jonathan.addington@jmaddington.com
+  license:
+    name: None
+  version: 0.0.01
+externalDocs:
+  description: IT Glue Developer
+  url: https://api.itglue.com/developer/
+servers:
+  - url: https://api.itglue.com
+  - url: https://api.eu.itglue.com
+  - url: https://api.au.itglue.com
+tags:
+  - name: Organizations
+    description: |
+      The Organizations resource is used to manage information about organizations in your account. 
+    
+      Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
+    externalDocs:
+      description: IT Glue Documentation
+      url: https://api.itglue.com/developer/#organizations
+
+  - name: Organization Types
+    description: |
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+    externalDocs:
+      description: IT Glue Documentation
+      url: https://api.itglue.com/developer/#organizationstypes
+
+  - name: Organization Statuses
+    description: |
+      This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
+
+      An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
+
+    externalDocs:
+      url: https://api.itglue.com/developer/#organization-statuses
+      description: IT Glue Documentation
+
+paths:
+  /organizations:
+    get:
+      tags: 
+      - Organizations
+      description: |
+        Returns a list of organizations in your account.
+
+        Any quick notes on an organization will be truncated to the first 250 characters. The full quick notes are available via the Show request.
+
+      summary: Returns a list of organizations in your account.
+      operationId: indexOrganizations
+      parameters:
+          - name: filter
+            in: query
+            description: Must be a hash
+            required: false
+            schema:
+              type: string
+          - name: filter[id]
+            in: query
+            description: Organization ID
+            required: false
+            schema:
+              type: number
+          - name: filter[name]
+            in: query
+            description: Name of organization
+            required: false
+            schema:
+              type: string
+      # Not even close to finishing the parameters here.
+      requestBody:
+        description: Get a list of organizations in your account.
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '200':
+          description: Succeeded
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests
+
+
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 2
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "Happy Frog"
+            alert:
+              type: string
+              example: "THIS IS UNDEFINED"
+            description:
+              type: string
+              example: "Happy frog is a demo"
+            organization-type-id: 
+              type: integer
+              format: int32
+              example: 86
+            organization-type-name:
+              type: string
+              example: "Customer"
+            organization-status-id:
+              type: integer
+              format: int32
+              example: 68
+            organization-status-name: 
+              type: string
+              example: Active
+            primary:
+              type: boolean
+              example: false
+            logo:
+              type: string
+              example: "NO EXAMPLES"
+            quick-notes:
+              type: string
+            short-name:
+              type: string
+              example: "Happy"
+            created-at:
+              type: string
+              format: date-time
+            updated-at:
+              type: string
+              format: date-time
