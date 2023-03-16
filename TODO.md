@@ -1,0 +1,34 @@
+Not implemented:
+- Attachments
+- Configuration Interfaces
+- Configuration Statuses
+- Configuration Types
+- Configurations
+- Contact Types
+- Contacts
+- Countries
+- Documents
+- Domains
+- Expirations
+- Exports
+- Flexible Asset Fields
+- Flexible Asset Types
+- Flexible Assets
+- Groups
+- Locations
+- Logs
+- Manufacturers
+- Models
+- Operating System
+- Organization Statuses
+- Organization Types
+- Organizations
+    - Bulk_update
+    - Buld_destroy
+- Password Categories
+- Passwords
+- Platforms
+- Regions
+- Related Items
+- User Metrics
+- Users
