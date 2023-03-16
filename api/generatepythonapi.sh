@@ -1,7 +1,7 @@
 docker run --rm \
   -v ${PWD}:/local \
-  -v "${PWD}/../openapi.yml:/local/openapi.yml" \
+  -v "${PWD}/../itglue.yml:/local/itglue.yml" \
   openapitools/openapi-generator-cli generate \
-  -i /local/openapi.yml \
+  -i /local/itglue.yml \
   -g python \
   -o /local/python/api
