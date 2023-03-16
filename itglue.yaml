@@ -15,12 +15,11 @@ info:
   version: 0.0.01
 externalDocs:
   description: IT Glue Developer
-  url: https://api.itglue.com/developer/
+  url: 'https://api.itglue.com/developer/'
 servers:
-  - url: https://api.itglue.com
-  - url: https://api.eu.itglue.com
-  - url: https://api.au.itglue.com
-  
+  - url: 'https://api.itglue.com'
+  - url: 'https://api.eu.itglue.com'
+  - url: 'https://api.au.itglue.com'
 tags:
   - name: Organizations
     description: |
@@ -29,7 +28,7 @@ tags:
       Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
     externalDocs:
       description: IT Glue Documentation
-      url: https://api.itglue.com/developer/#organizations
+      url: 'https://api.itglue.com/developer/#organizations'
 
   - name: Organization Types
     description: |
@@ -38,7 +37,7 @@ tags:
       A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
     externalDocs:
       description: IT Glue Documentation
-      url: https://api.itglue.com/developer/#organizationstypes
+      url: 'https://api.itglue.com/developer/#organizationstypes'
 
   - name: Organization Statuses
     description: |
@@ -47,7 +46,7 @@ tags:
       An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
 
     externalDocs:
-      url: https://api.itglue.com/developer/#organization-statuses
+      url: 'https://api.itglue.com/developer/#organization-statuses'
       description: IT Glue Documentation
 
 paths:
@@ -55,6 +54,19 @@ paths:
     get:
       tags:
         - Organizations
+      description: |
+        Returns a list of organizations in your account.
+
+        Any quick notes on an organization will be truncated to the first 250 characters. The full quick notes are available via the Show request.
+      
+      summary: Returns a list of organizations in your account.
+      operationId: indexOrganizations
+      requestBody:
+        description: Get a list of organizations in your account.
+        content:
+          application/vnd.api+json:
+            schema: 
+              $ref: '#/components/schemas/Organization'
       parameters:
         - name: filter
           in: query
@@ -159,7 +171,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Organization'
 
-  /organizations/{id}:   # Add this endpoint
+  /organizations/{id}:
     get:
       tags:
         - Organizations
@@ -180,7 +192,7 @@ paths:
             enum:
               - adapters_resources
               - attachments
-          description: 'Must be one of: adapters_resources, attachments.''
+          description: 'Must be one of: adapters_resources, attachments.'
       responses:
         '200':
           description: A successful response
@@ -192,7 +204,6 @@ paths:
           description: Unauthorized
         '404':
           description: Not Found
-
 components:
   schemas:
     Organization:
