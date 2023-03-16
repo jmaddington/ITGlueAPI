@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: IT Glue API in OpenAPI Spec
+  description: |-
+    This is the IT Glue API implemented in OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io).
+    
+    Some useful links:
+    - [Reference](https://api.itglue.com/developer/)
+
+  contact:
+    email: jonathan.addington@jmaddington.com
+  license:
+    name: None
+  version: 0.0.01
+externalDocs:
+  description: IT Glue Developer
+  url: https://api.itglue.com/developer/
+servers:
+  - url: https://api.itglue.com
+  - url: https://api.eu.itglue.com
+  - url: https://api.au.itglue.com
+  
+tags:
+  - name: Organizations
+    description: |
+      The Organizations resource is used to manage information about organizations in your account. 
+    
+      Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
+    externalDocs:
+      description: IT Glue Documentation
+      url: https://api.itglue.com/developer/#organizations
+
+  - name: Organization Types
+    description: |
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+    externalDocs:
+      description: IT Glue Documentation
+      url: https://api.itglue.com/developer/#organizationstypes
+
+  - name: Organization Statuses
+    description: |
+      This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
+
+      An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
+
+    externalDocs:
+      url: https://api.itglue.com/developer/#organization-statuses
+      description: IT Glue Documentation
+
+paths:
+  /organizations:
+    get:
+      tags:
+        - Organizations
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              organization_type_id:
+                type: number
+              organization_status_id:
+                type: number
+              created_at:
+                type: string
+              updated_at:
+                type: string
+              my_glue_account_id:
+                type: number
+              psa_id:
+                type: string
+              psa_integration_type:
+                type: string
+                enum:
+                  - manage
+                  - autotask
+                  - tigerpaw
+                  - kaseya-bms
+                  - pulseway-psa
+                  - vorex
+              group_id:
+                type: number
+          style: form
+          explode: true
+        - name: filter[exclude]
+          in: query
+          required: false
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              organization_type_id:
+                type: number
+              organization_status_id:
+                type: number
+          style: form
+          explode: true
+        - name: filter[range]
+          in: query
+          required: false
+          schema:
+            type: object
+            properties:
+              my_glue_account_id:
+                type: number
+          style: form
+          explode: true
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - id
+              - updated_at
+              - organization_status_name
+              - organization_type_name
+              - created_at
+              - short_name
+              - my_glue_account_id
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: object
+            properties:
+              number:
+                type: number
+              size:
+                type: number
+          style: form
+          explode: true
+        - name: include
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - adapters_resources
+              - attachments
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+
+  /organizations/{id}:   # Add this endpoint
+    get:
+      tags:
+        - Organizations
+      summary: Retrieve an organization
+      description: Returns the details of an existing organization.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Must be a number.
+        - name: include
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - adapters_resources
+              - attachments
+          description: 'Must be one of: adapters_resources, attachments.''
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 2
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "Happy Frog"
+            alert:
+              type: string
+              example: "THIS IS UNDEFINED"
+            description:
+              type: string
+              example: "Happy frog is a demo"
+            organization-type-id: 
+              type: integer
+              format: int32
+              example: 86
+            organization-type-name:
+              type: string
+              example: "Customer"
+            organization-status-id:
+              type: integer
+              format: int32
+              example: 68
+            organization-status-name: 
+              type: string
+              example: Active
+            primary:
+              type: boolean
+              example: false
+            logo:
+              type: string
+              example: "NO EXAMPLES"
+            quick-notes:
+              type: string
+            short-name:
+              type: string
+              example: "Happy"
+            created-at:
+              type: string
+              format: date-time
+            updated-at:
+              type: string
+              format: date-time
