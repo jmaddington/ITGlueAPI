@@ -26,6 +26,7 @@ tags:
       The Organizations resource is used to manage information about organizations in your account. 
     
       Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
+    
     externalDocs:
       description: IT Glue Documentation
       url: 'https://api.itglue.com/developer/#organizations'
