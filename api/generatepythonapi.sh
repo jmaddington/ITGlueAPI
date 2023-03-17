@@ -10,6 +10,8 @@ else
   exit 1
 fi
 
+rm -rf python/api
+
 docker run --rm \
   -v ${PWD}:/local \
   -v "${PWD}/../itglue.yaml:/local/itglue.yaml" \
