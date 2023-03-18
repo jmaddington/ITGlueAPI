@@ -50,16 +50,6 @@ tags:
       description: IT Glue Documentation
       url: 'https://api.itglue.com/developer/#organizations'
 
-  - name: Organization Statuses
-    description: |
-      This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
-
-      An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
-
-    externalDocs:
-      url: 'https://api.itglue.com/developer/#organization-statuses'
-      description: IT Glue Documentation
-
 security:
   - ApiKeyAuth: []
 
@@ -316,9 +306,9 @@ paths:
         '200':
           description: Successfully created the organization status
           content:
-          application/vnd.api+json; charset=utf-8:
-            schema:
-            $ref: '#/components/schemas/OrganizationStatus'
+            application/vnd.api+json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/OrganizationStatus'
 
         '401':
           description: Unauthorized
