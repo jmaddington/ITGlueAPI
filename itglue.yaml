@@ -17,38 +17,39 @@ externalDocs:
   description: IT Glue Developer
   url: 'https://api.itglue.com/developer/'
 servers:
-  - url: 'https://api.itglue.com'
-  - url: 'https://api.eu.itglue.com'
-  - url: 'https://api.au.itglue.com'
+  - url: "https://api.itglue.com"
+  - url: "https://api.eu.itglue.com"
+  - url: "https://api.au.itglue.com"
 tags:
-  - name: Organization Types
-    description: |
-      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
-
-      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+  - name: OrganizationTypes
     externalDocs:
       description: IT Glue Documentation
       url: 'https://api.itglue.com/developer/#organizationstypes'
 
-  - name: Organization Statuses
+    description: |
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+
+  - name: OrganizationStatuses
+    externalDocs:
+      url: 'https://api.itglue.com/developer/#organization-statuses'
+      description: IT Glue Documentation
+
     description: |
       This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
 
       An organization status may be referenced by one ore more organizations. Each organization can have one organization status, but it's not required.
 
-    externalDocs:
-      url: 'https://api.itglue.com/developer/#organization-statuses'
-      description: IT Glue Documentation
-
   - name: Organizations
+    externalDocs:
+      description: IT Glue Documentation
+      url: 'https://api.itglue.com/developer/#organizations'
+
     description: |
       The Organizations resource is used to manage information about organizations in your account. 
     
       Keep in mind that an organization can have one or more sub-organizations, but there is currently no support in the API for assigning a parent to create new sub-organizations. You would need to manually complete this task from your IT Glue account.
-    
-    externalDocs:
-      description: IT Glue Documentation
-      url: 'https://api.itglue.com/developer/#organizations'
 
 security:
   - ApiKeyAuth: []
@@ -57,72 +58,71 @@ paths:
 
   /organization_types:
     get:
-    tags:
-      - Organization Types
-    summary: List all organization types.
-    responses:
-      '200':
-        description: A list of organization types in your account.
-        content:
-          application/vnd.api+json; charset=utf-8:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/OrganizationType'
-      '401':
-        description: Unauthorized
+      tags:
+        - OrganizationTypes
+      description: List all organization types in your account.
+      summary: List all organization types.
 
       parameters:
-        - name: filter
-          in: query
-          required: false
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-                description: | 
-                           Param Type: CGI
-                           Notes: Comma separated values
-        - name: sort
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - name
-              - id
-              - updated_at
-              - created_at
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: object
-            properties:
-              number:
-                type: number
-              size:
-                type: number
-          style: form
-          explode: true
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: | 
+                         Param Type: CGI
+                         Notes: Comma separated values
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+            - name
+            - id
+            - updated_at
+            - created_at
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: object
+          properties:
+            number:
+              type: number
+            size:
+              type: number
+        style: form
+        explode: true
+
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/vnd.api+json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized
 
     post:
+      tags:
+        - OrganizationTypes
       summary: Create an organization type.
       requestBody:
         required: true
         content:
-          application/vnd.api+json charset=utf-8:
+          application/vnd.api+json; charset=utf-8:
             schema:
               $ref: '#/components/schemas/OrganizationType'
       responses:
         '200':
           description: Returns the created object if successful.
           content:
-            application/vnd.api+json charset=utf-8:
+            application/vnd.api+json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/OrganizationType'
         '401':
@@ -134,8 +134,10 @@ paths:
         '403':
           description: Forbidden
 
-    /organization_types/{id}:
+  /organization_types/{id}:
       get:
+        tags:
+          - OrganizationTypes
         summary: Retrieve an organization type.
         parameters:
           - in: path
@@ -149,7 +151,7 @@ paths:
           '200':
             description: Details of an existing organization type.
             content:
-              application/vnd.api+json charset=utf-8:
+              application/vnd.api+json;charset=utf-8:
                 schema:
                   $ref: '#/components/schemas/OrganizationType'
           '401':
@@ -158,6 +160,8 @@ paths:
             description: Not Found
 
       patch:
+        tags:
+          - OrganizationTypes
         summary: Update an organization type.
         parameters:
           - in: path
@@ -177,7 +181,7 @@ paths:
           '200':
             description: Successfully updated organization type.
             content:
-              application/vnd.api+json charset=utf-8:
+              application/vnd.api+json;charset=utf-8:
                 schema:
                   $ref: '#/components/schemas/OrganizationType'
           '401':
@@ -191,7 +195,9 @@ paths:
 
   /organization_statuses:
     get:
-      summary: List all organization statuses
+      tags:
+        - OrganizationTypes
+      summary: List all OrganizationStatuses
       parameters:
         - name: filter
           in: query
@@ -218,7 +224,7 @@ paths:
         '200':
           description: A list of organization statuses in your account.
           content:
-            application/vnd.api+json; charset=utf-8:
+            application/vnd.api+json;charset=utf-8:
               schema:
                 type: object
                 properties:
@@ -231,23 +237,23 @@ paths:
 
     post:
       tags:
-        - organization_statuses
+        - OrganizationTypes
       summary: Create an organization status
       description: Creates a new organization status in your account. Returns the created object if successful.
       requestBody:
         required: true
         content:
-          application/vnd.api+json; charset=utf-8:
+          application/vnd.api+json;charset=utf-8:
             schema:
-            $ref: '#/components/schemas/OrganizationStatus'
+              $ref: '#/components/schemas/OrganizationStatus'
 
       responses:
         '200':
           description: Successfully created the organization status
           content:
-          application/vnd.api+json; charset=utf-8:
-            schema:
-            $ref: '#/components/schemas/OrganizationStatus'
+            application/vnd.api+json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/OrganizationStatus'
 
         '401':
           description: Unauthorized
@@ -261,7 +267,7 @@ paths:
   /organization_statuses/{id}:
     get:
       tags:
-        - organization_statuses
+        - OrganizationStatuses
       summary: Retrieve an organization status
       description: Returns the details of an existing organization status
       parameters:
@@ -275,7 +281,7 @@ paths:
         '200':
           description: Successfully retrieved the organization status
           content:
-            application/vnd.api+json; charset=utf-8:
+            application/vnd.api+json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/OrganizationStatus'
         '401':
@@ -285,7 +291,7 @@ paths:
 
     patch:
       tags:
-        - organization_statuses
+        - OrganizationStatuses
       summary: Update an organization status
       description: Updates an organization status in your account.
       parameters:
@@ -298,15 +304,15 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.api+json; charset=utf-8:
+          application/vnd.api+json;charset=utf-8:
             schema:
-            $ref: '#/components/schemas/OrganizationStatus'
+              $ref: '#/components/schemas/OrganizationStatus'
 
       responses:
         '200':
           description: Successfully created the organization status
           content:
-            application/vnd.api+json; charset=utf-8:
+            application/vnd.api+json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/OrganizationStatus'
 
@@ -329,11 +335,10 @@ paths:
         Any quick notes on an organization will be truncated to the first 250 characters. The full quick notes are available via the Show request.
       
       summary: Returns a list of organizations in your account.
-      operationId: indexOrganizations
       requestBody:
         description: Get a list of organizations in your account.
         content:
-          application/vnd.api+json:
+          application/vnd.api+json; charset=utf-8:
             schema: 
               $ref: '#/components/schemas/Organization'
 
@@ -446,7 +451,6 @@ paths:
         - Organizations
       description: Creates an organization. Returns the created object if successful.
       summary: Create an organization.
-      operationId: createOrganization
       requestBody:
         description: Organization data to create a new organization.
         content:
@@ -539,6 +543,8 @@ paths:
           description: Not Found
 
     patch:
+      tags:
+        - Organizations
       summary: Update an organization
       requestBody:
         description: Get a list of organizations in your account.
@@ -612,10 +618,8 @@ components:
       type: apiKey
       in: header
       name: x-api-key
-  schemas:
-    components:
-      schemas:
 
+  schemas:
     OrganizationType:
       type: object
       properties:
@@ -673,7 +677,7 @@ components:
             description:
               type: string
               example: "Happy frog is a demo"
-            organization-type-id: 
+            organization-type-id:
               type: integer
               format: int32
               example: 86
@@ -684,7 +688,7 @@ components:
               type: integer
               format: int32
               example: 68
-            organization-status-name: 
+            organization-status-name:
               type: string
               example: Active
             primary:
