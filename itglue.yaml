@@ -213,8 +213,7 @@ paths:
                 type: string
         - in: query
           name: sort
-          description:
-            Comma separated values. To invert order use -, eg: -name
+          description: "Comma separated values. To invert order use -, eg: -name"
           schema:
             type: string
             enum: [ name, id, created_at, updated_at ]
