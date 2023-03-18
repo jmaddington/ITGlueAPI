@@ -3,7 +3,7 @@
 """
     IT Glue API in OpenAPI Spec
 
-    This is the IT Glue API implemented in OpenAPI 3.0 specification.  You can find out more about Swagger at [https://swagger.io](https://swagger.io).  Some useful links: - [Reference](https://api.itglue.com/developer/)  # noqa: E501
+    This is the IT Glue API implemented in OpenAPI 3.0 specification.  NAMING CONVENTIONS  We try to match the ITGlue API naming conventions as closely as possible. In descriptions of summaries a different word may be used to match common English. For instance, the ITGlue API uses the word \"index\" to describe a GET method, but the description will use the word \"list\" instead.  index: Used to get a list of resources. I.e., multiple resources.    HTTP Method: GET   Example: indexOrganizations show: Used to get a single resource. I.e., one resource.     HTTP Method: GET     Example: showOrganization create: Used to create a new resource.     HTTP Method: POST     Example: createOrganization update: Used to update an existing resource.     HTTP Method: PATCH     Example: updateOrganization  ITGLUE API DOCUMENTATION - [Reference](https://api.itglue.com/developer/)  # noqa: E501
 
     The version of the OpenAPI document: 0.0.01
     Contact: jonathan.addington@jmaddington.com
