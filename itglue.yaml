@@ -21,6 +21,14 @@ servers:
   - url: 'https://api.eu.itglue.com'
   - url: 'https://api.au.itglue.com'
 tags:
+  - name: Organization Types
+    description: |
+      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
+
+      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
+    externalDocs:
+      description: IT Glue Documentation
+      url: 'https://api.itglue.com/developer/#organizationstypes'
   - name: Organizations
     description: |
       The Organizations resource is used to manage information about organizations in your account. 
@@ -54,6 +62,63 @@ security:
   - ApiKeyAuth: []
 
 paths:
+  paths:
+    /organization_types:
+      get:
+      tags:
+        - Organization Types
+      summary: List all organization types.
+      responses:
+        '200':
+          description: A list of organization types in your account.
+          content:
+            application/vnd.api+json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganizationType'
+        '401':
+          description: Unauthorized
+
+        parameters:
+          - name: filter
+            in: query
+            required: false
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: | 
+                             Param Type: CGI
+                             Notes: Comma separated values
+          - name: sort
+            in: query
+            required: false
+            schema:
+              type: string
+              enum:
+                - name
+                - id
+                - updated_at
+                - created_at
+          - name: page
+            in: query
+            required: false
+            schema:
+              type: object
+              properties:
+                number:
+                  type: number
+                size:
+                  type: number
+            style: form
+            explode: true
+
+
   /organizations:
     get:
       tags:
@@ -347,6 +412,26 @@ components:
       in: header
       name: x-api-key
   schemas:
+    components:
+      schemas:
+        OrganizationType:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+                created-at:
+                  type: string
+                  format: date-time
+                updated-at:
+                  type: string
+                  format: date-time
     Organization:
       type: object
       properties:
