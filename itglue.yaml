@@ -262,47 +262,16 @@ paths:
         content:
           application/vnd.api+json charset=utf-8:
             schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  required:
-                    - type
-                    - attributes
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                        - organization_statuses
-                    attributes:
-                      type: object
-                      required:
-                        - name
-                      properties:
-                        name:
-                          type: string
+            $ref: '#/components/schemas/OrganizationStatus'
+
       responses:
         '200':
           description: Successfully created the organization status
           content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      type:
-                        type: string
-                        enum:
-                          - organization_statuses
-                      attributes:
-                        type: object
-                        properties:
-                          name:
-                            type: string
+          application/vnd.api+json charset=utf-8:
+            schema:
+            $ref: '#/components/schemas/OrganizationStatus'
+
         '401':
           description: Unauthorized
         '403':
@@ -343,6 +312,7 @@ paths:
           application/vnd.api+json:
             schema: 
               $ref: '#/components/schemas/Organization'
+
       parameters:
         - name: filter
           in: query
