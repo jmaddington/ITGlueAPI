@@ -2,16 +2,34 @@ openapi: 3.0.3
 info:
   title: IT Glue API in OpenAPI Spec
   description: |-
-    This is the IT Glue API implemented in OpenAPI 3.0 specification.  You can find out more about
-    Swagger at [https://swagger.io](https://swagger.io).
+    This is the IT Glue API implemented in OpenAPI 3.0 specification.
     
-    Some useful links:
+    NAMING CONVENTIONS
+    
+    We try to match the ITGlue API naming conventions as closely as possible. In descriptions of summaries a different
+    word may be used to match common English. For instance, the ITGlue API uses the word "index" to describe a GET method,
+    but the description will use the word "list" instead.
+    
+    index: Used to get a list of resources. I.e., multiple resources. 
+      HTTP Method: GET
+      Example: indexOrganizations
+    show: Used to get a single resource. I.e., one resource.
+        HTTP Method: GET
+        Example: showOrganization
+    create: Used to create a new resource.
+        HTTP Method: POST
+        Example: createOrganization
+    update: Used to update an existing resource.
+        HTTP Method: PATCH
+        Example: updateOrganization
+    
+    ITGLUE API DOCUMENTATION
     - [Reference](https://api.itglue.com/developer/)
 
   contact:
     email: jonathan.addington@jmaddington.com
   license:
-    name: None
+    name: MIT
   version: 0.0.01
 externalDocs:
   description: IT Glue Developer
@@ -62,7 +80,7 @@ paths:
         - OrganizationTypes
       description: List all organization types in your account.
       summary: List all organization types.
-
+      OperationId: indexOrganizationTypes
       parameters:
       - name: filter
         in: query
@@ -112,6 +130,7 @@ paths:
       tags:
         - OrganizationTypes
       summary: Create an organization type.
+      OperationId: createOrganizationType
       requestBody:
         required: true
         content:
@@ -138,11 +157,12 @@ paths:
       get:
         tags:
           - OrganizationTypes
-        summary: Retrieve an organization type.
+        summary: Show an organization type.
+        OperationId: showOrganizationType
         parameters:
           - in: path
             name: id
-            description: ID of the organization type to retrieve
+            description: ID of the organization type to show
             required: true
             schema:
               type: integer
@@ -163,6 +183,7 @@ paths:
         tags:
           - OrganizationTypes
         summary: Update an organization type.
+        OperationId: updateOrganizationType
         parameters:
           - in: path
             name: id
@@ -198,6 +219,7 @@ paths:
       tags:
         - OrganizationTypes
       summary: List all OrganizationStatuses
+      OperationId: indexOrganizationStatuses
       parameters:
         - name: filter
           in: query
@@ -240,6 +262,7 @@ paths:
         - OrganizationTypes
       summary: Create an organization status
       description: Creates a new organization status in your account. Returns the created object if successful.
+      OperationId: createOrganizationStatus
       requestBody:
         required: true
         content:
@@ -268,12 +291,13 @@ paths:
     get:
       tags:
         - OrganizationStatuses
-      summary: Retrieve an organization status
+      summary: Show an organization status
       description: Returns the details of an existing organization status
+      OperationId: showOrganizationStatus
       parameters:
         - name: id
           in: path
-          description: ID of the organization status to retrieve
+          description: ID of the organization status to show
           required: true
           schema:
             type: integer
@@ -294,6 +318,7 @@ paths:
         - OrganizationStatuses
       summary: Update an organization status
       description: Updates an organization status in your account.
+      OperationId: updateOrganizationStatus
       parameters:
         - name: id
           in: path
@@ -335,6 +360,7 @@ paths:
         Any quick notes on an organization will be truncated to the first 250 characters. The full quick notes are available via the Show request.
       
       summary: Returns a list of organizations in your account.
+      OperationId: indexOrganizations
       requestBody:
         description: Get a list of organizations in your account.
         content:
@@ -511,8 +537,9 @@ paths:
     get:
       tags:
         - Organizations
-      summary: Retrieve an organization
+      summary: Show an organization
       description: Returns the details of an existing organization.
+      OperationId: showOrganization
       parameters:
         - name: id
           in: path
@@ -546,10 +573,11 @@ paths:
       tags:
         - Organizations
       summary: Update an organization
+      OperationId: updateOrganization
       requestBody:
         description: Get a list of organizations in your account.
         content:
-          application/vnd.api+json:
+          application/vnd.api+json;charset=utf-8:
             schema: 
               $ref: '#/components/schemas/Organization'
       parameters:
