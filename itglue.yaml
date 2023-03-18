@@ -228,7 +228,7 @@ paths:
         '200':
           description: A list of organization statuses in your account.
           content:
-            application/vnd.api+json charset=utf-8:
+            application/vnd.api+json; charset=utf-8:
               schema:
                 type: object
                 properties:
@@ -247,7 +247,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.api+json charset=utf-8:
+          application/vnd.api+json; charset=utf-8:
             schema:
             $ref: '#/components/schemas/OrganizationStatus'
 
@@ -255,7 +255,7 @@ paths:
         '200':
           description: Successfully created the organization status
           content:
-          application/vnd.api+json charset=utf-8:
+          application/vnd.api+json; charset=utf-8:
             schema:
             $ref: '#/components/schemas/OrganizationStatus'
 
@@ -285,7 +285,7 @@ paths:
         '200':
           description: Successfully retrieved the organization status
           content:
-            application/vnd.api+json charset=utf-8:
+            application/vnd.api+json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/OrganizationStatus'
         '401':
@@ -308,7 +308,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.api+json charset=utf-8:
+          application/vnd.api+json; charset=utf-8:
             schema:
             $ref: '#/components/schemas/OrganizationStatus'
 
@@ -316,7 +316,7 @@ paths:
         '200':
           description: Successfully created the organization status
           content:
-          application/vnd.api+json charset=utf-8:
+          application/vnd.api+json; charset=utf-8:
             schema:
             $ref: '#/components/schemas/OrganizationStatus'
 
