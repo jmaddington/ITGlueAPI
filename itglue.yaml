@@ -80,7 +80,7 @@ paths:
         - OrganizationTypes
       description: List all organization types in your account.
       summary: List all organization types.
-      OperationId: indexOrganizationTypes
+      operationId: indexOrganizationTypes
       parameters:
       - name: filter
         in: query
@@ -130,7 +130,7 @@ paths:
       tags:
         - OrganizationTypes
       summary: Create an organization type.
-      OperationId: createOrganizationType
+      operationId: createOrganizationType
       requestBody:
         required: true
         content:
@@ -158,7 +158,7 @@ paths:
         tags:
           - OrganizationTypes
         summary: Show an organization type.
-        OperationId: showOrganizationType
+        operationId: showOrganizationType
         parameters:
           - in: path
             name: id
@@ -183,7 +183,7 @@ paths:
         tags:
           - OrganizationTypes
         summary: Update an organization type.
-        OperationId: updateOrganizationType
+        operationId: updateOrganizationType
         parameters:
           - in: path
             name: id
@@ -219,7 +219,7 @@ paths:
       tags:
         - OrganizationTypes
       summary: List all OrganizationStatuses
-      OperationId: indexOrganizationStatuses
+      operationId: indexOrganizationStatuses
       parameters:
         - name: filter
           in: query
@@ -262,7 +262,7 @@ paths:
         - OrganizationTypes
       summary: Create an organization status
       description: Creates a new organization status in your account. Returns the created object if successful.
-      OperationId: createOrganizationStatus
+      operationId: createOrganizationStatus
       requestBody:
         required: true
         content:
@@ -293,7 +293,7 @@ paths:
         - OrganizationStatuses
       summary: Show an organization status
       description: Returns the details of an existing organization status
-      OperationId: showOrganizationStatus
+      operationId: showOrganizationStatus
       parameters:
         - name: id
           in: path
@@ -318,7 +318,7 @@ paths:
         - OrganizationStatuses
       summary: Update an organization status
       description: Updates an organization status in your account.
-      OperationId: updateOrganizationStatus
+      operationId: updateOrganizationStatus
       parameters:
         - name: id
           in: path
@@ -360,7 +360,7 @@ paths:
         Any quick notes on an organization will be truncated to the first 250 characters. The full quick notes are available via the Show request.
       
       summary: Returns a list of organizations in your account.
-      OperationId: indexOrganizations
+      operationId: indexOrganizations
       requestBody:
         description: Get a list of organizations in your account.
         content:
@@ -477,6 +477,7 @@ paths:
         - Organizations
       description: Creates an organization. Returns the created object if successful.
       summary: Create an organization.
+      operationId: createOrganization
       requestBody:
         description: Organization data to create a new organization.
         content:
@@ -539,7 +540,7 @@ paths:
         - Organizations
       summary: Show an organization
       description: Returns the details of an existing organization.
-      OperationId: showOrganization
+      operationId: showOrganization
       parameters:
         - name: id
           in: path
@@ -565,7 +566,6 @@ paths:
                 $ref: '#/components/schemas/Organization'
         '401':
           description: Unauthorized
-          
         '404':
           description: Not Found
 
@@ -573,7 +573,7 @@ paths:
       tags:
         - Organizations
       summary: Update an organization
-      OperationId: updateOrganization
+      operationId: updateOrganization
       requestBody:
         description: Get a list of organizations in your account.
         content:
