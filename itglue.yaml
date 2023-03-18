@@ -118,6 +118,30 @@ paths:
             style: form
             explode: true
 
+      post:
+        summary: Create an organization type.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationType'
+        responses:
+          '200':
+            description: Returns the created object if successful.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OrganizationType'
+          '401':
+            description: Unauthorized
+          '422':
+            description: Bad Request
+          '415':
+            description: Bad Content Type
+          '403':
+            description: Forbidden
+
     /organization_types/{id}:
       get:
         summary: Retrieve an organization type.
