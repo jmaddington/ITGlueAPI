@@ -50,15 +50,6 @@ tags:
       description: IT Glue Documentation
       url: 'https://api.itglue.com/developer/#organizations'
 
-  - name: Organization Types
-    description: |
-      This resource is used to manage information about organization types for your account. Organization type IDs can be used to POST new organizations.
-
-      A organization type may be referenced by one or more organizations. Each organization can have one organization type, but it's not required.
-    externalDocs:
-      description: IT Glue Documentation
-      url: 'https://api.itglue.com/developer/#organizationstypes'
-
   - name: Organization Statuses
     description: |
       This resource is used to manage information about organization statuses for your account. Organization status IDs can be used to POST new organizations.
@@ -639,24 +630,24 @@ components:
     components:
       schemas:
 
-        OrganizationType:
+    OrganizationType:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
           type: object
           properties:
-            id:
+            name:
               type: string
-            type:
+            created-at:
               type: string
-            attributes:
-              type: object
-              properties:
-                name:
-                  type: string
-                created-at:
-                  type: string
-                  format: date-time
-                updated-at:
-                  type: string
-                  format: date-time
+              format: date-time
+            updated-at:
+              type: string
+              format: date-time
 
     OrganizationStatus:
       type: object
