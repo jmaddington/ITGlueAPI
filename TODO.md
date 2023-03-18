@@ -20,8 +20,6 @@ Not implemented:
 - Manufacturers
 - Models
 - Operating System
-- Organization Statuses
-- Organization Types
 - Organizations
     - Bulk_update
     - Buld_destroy
