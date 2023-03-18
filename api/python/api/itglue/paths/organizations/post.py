@@ -447,7 +447,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
     @typing.overload
-    def _create_organization_oapg(
+    def _organizations_post_oapg(
         self,
         content_type: typing_extensions.Literal["application/vnd.api+json"] = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -461,7 +461,7 @@ class BaseApi(api_client.Api):
     ]: ...
 
     @typing.overload
-    def _create_organization_oapg(
+    def _organizations_post_oapg(
         self,
         content_type: str = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -476,7 +476,7 @@ class BaseApi(api_client.Api):
 
 
     @typing.overload
-    def _create_organization_oapg(
+    def _organizations_post_oapg(
         self,
         skip_deserialization: typing_extensions.Literal[True],
         content_type: str = ...,
@@ -488,7 +488,7 @@ class BaseApi(api_client.Api):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def _create_organization_oapg(
+    def _organizations_post_oapg(
         self,
         content_type: str = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -502,7 +502,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def _create_organization_oapg(
+    def _organizations_post_oapg(
         self,
         content_type: str = 'application/vnd.api+json',
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -579,11 +579,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class CreateOrganization(BaseApi):
+class OrganizationsPost(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     @typing.overload
-    def create_organization(
+    def organizations_post(
         self,
         content_type: typing_extensions.Literal["application/vnd.api+json"] = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -597,7 +597,7 @@ class CreateOrganization(BaseApi):
     ]: ...
 
     @typing.overload
-    def create_organization(
+    def organizations_post(
         self,
         content_type: str = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -612,7 +612,7 @@ class CreateOrganization(BaseApi):
 
 
     @typing.overload
-    def create_organization(
+    def organizations_post(
         self,
         skip_deserialization: typing_extensions.Literal[True],
         content_type: str = ...,
@@ -624,7 +624,7 @@ class CreateOrganization(BaseApi):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def create_organization(
+    def organizations_post(
         self,
         content_type: str = ...,
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -638,7 +638,7 @@ class CreateOrganization(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def create_organization(
+    def organizations_post(
         self,
         content_type: str = 'application/vnd.api+json',
         body: typing.Union[SchemaForRequestBodyApplicationVndApijson, schemas.Unset] = schemas.unset,
@@ -648,7 +648,7 @@ class CreateOrganization(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = False,
     ):
-        return self._create_organization_oapg(
+        return self._organizations_post_oapg(
             body=body,
             query_params=query_params,
             content_type=content_type,
@@ -728,7 +728,7 @@ class ApiForpost(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = False,
     ):
-        return self._create_organization_oapg(
+        return self._organizations_post_oapg(
             body=body,
             query_params=query_params,
             content_type=content_type,

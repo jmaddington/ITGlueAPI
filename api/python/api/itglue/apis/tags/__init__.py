@@ -6,7 +6,6 @@ import enum
 
 
 class TagValues(str, enum.Enum):
+    ORGANIZATION_TYPES = "OrganizationTypes"
+    ORGANIZATION_STATUSES = "OrganizationStatuses"
     ORGANIZATIONS = "Organizations"
-    ORGANIZATION_TYPES = "Organization Types"
-    ORGANIZATION_STATUSES = "Organization Statuses"
-    DEFAULT = "default"

@@ -12,3 +12,5 @@
 # sys.setrecursionlimit(n)
 
 from itglue.model.organization import Organization
+from itglue.model.organization_status import OrganizationStatus
+from itglue.model.organization_type import OrganizationType

@@ -144,8 +144,8 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import time
 import itglue
 from pprint import pprint
-from itglue.apis.tags import organizations_api
-from itglue.model.organization import Organization
+from itglue.apis.tags import organization_statuses_api
+from itglue.model.organization_status import OrganizationStatus
 # Defining the host is optional and defaults to https://api.itglue.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = itglue.Configuration(
@@ -166,44 +166,15 @@ configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with itglue.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = organizations_api.OrganizationsApi(api_client)
-    data = dict(
-        type="organizations",
-        attributes=dict(
-            name="name_example",
-            description="description_example",
-            organization_type_id=1,
-            organization_status_id=1,
-            quick_notes="quick_notes_example",
-            alert="alert_example",
-            short_name="short_name_example",
-        ),
-    ) # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} | 
-organization = Organization(
-        id=2,
-        attributes=dict(
-            name="Happy Frog",
-            alert="THIS IS UNDEFINED",
-            description="Happy frog is a demo",
-            organization_type_id=86,
-            organization_type_name="Customer",
-            organization_status_id=68,
-            organization_status_name="Active",
-            primary=False,
-            logo="NO EXAMPLES",
-            quick_notes="quick_notes_example",
-            short_name="Happy",
-            created_at="1970-01-01T00:00:00.00Z",
-            updated_at="1970-01-01T00:00:00.00Z",
-        ),
-    ) # Organization | Organization data to create a new organization. (optional)
+    api_instance = organization_statuses_api.OrganizationStatusesApi(api_client)
+    id = 1 # int | ID of the organization status to retrieve
 
     try:
-        # Create an organization.
-        api_response = api_instance.create_organization(dataorganization=organization)
+        # Retrieve an organization status
+        api_response = api_instance.organization_statuses_id_get(id)
         pprint(api_response)
     except itglue.ApiException as e:
-        print("Exception when calling OrganizationsApi->create_organization: %s\n" % e)
+        print("Exception when calling OrganizationStatusesApi->organization_statuses_id_get: %s\n" % e)
 ```
 
 ## Documentation for API Endpoints
@@ -212,14 +183,24 @@ All URIs are relative to *https://api.itglue.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OrganizationsApi* | [**create_organization**](docs/apis/tags/OrganizationsApi.md#create_organization) | **post** /organizations | Create an organization.
-*OrganizationsApi* | [**index_organizations**](docs/apis/tags/OrganizationsApi.md#index_organizations) | **get** /organizations | Returns a list of organizations in your account.
+*OrganizationStatusesApi* | [**organization_statuses_id_get**](docs/apis/tags/OrganizationStatusesApi.md#organization_statuses_id_get) | **get** /organization_statuses/{id} | Retrieve an organization status
+*OrganizationStatusesApi* | [**organization_statuses_id_patch**](docs/apis/tags/OrganizationStatusesApi.md#organization_statuses_id_patch) | **patch** /organization_statuses/{id} | Update an organization status
+*OrganizationTypesApi* | [**organization_statuses_get**](docs/apis/tags/OrganizationTypesApi.md#organization_statuses_get) | **get** /organization_statuses | List all OrganizationStatuses
+*OrganizationTypesApi* | [**organization_statuses_post**](docs/apis/tags/OrganizationTypesApi.md#organization_statuses_post) | **post** /organization_statuses | Create an organization status
+*OrganizationTypesApi* | [**organization_types_get**](docs/apis/tags/OrganizationTypesApi.md#organization_types_get) | **get** /organization_types | List all organization types.
+*OrganizationTypesApi* | [**organization_types_id_get**](docs/apis/tags/OrganizationTypesApi.md#organization_types_id_get) | **get** /organization_types/{id} | Retrieve an organization type.
+*OrganizationTypesApi* | [**organization_types_id_patch**](docs/apis/tags/OrganizationTypesApi.md#organization_types_id_patch) | **patch** /organization_types/{id} | Update an organization type.
+*OrganizationTypesApi* | [**organization_types_post**](docs/apis/tags/OrganizationTypesApi.md#organization_types_post) | **post** /organization_types | Create an organization type.
+*OrganizationsApi* | [**organizations_get**](docs/apis/tags/OrganizationsApi.md#organizations_get) | **get** /organizations | Returns a list of organizations in your account.
 *OrganizationsApi* | [**organizations_id_get**](docs/apis/tags/OrganizationsApi.md#organizations_id_get) | **get** /organizations/{id} | Retrieve an organization
-*DefaultApi* | [**organizations_id_patch**](docs/apis/tags/DefaultApi.md#organizations_id_patch) | **patch** /organizations/{id} | Update an organization
+*OrganizationsApi* | [**organizations_id_patch**](docs/apis/tags/OrganizationsApi.md#organizations_id_patch) | **patch** /organizations/{id} | Update an organization
+*OrganizationsApi* | [**organizations_post**](docs/apis/tags/OrganizationsApi.md#organizations_post) | **post** /organizations | Create an organization.
 
 ## Documentation For Models
 
  - [Organization](docs/models/Organization.md)
+ - [OrganizationStatus](docs/models/OrganizationStatus.md)
+ - [OrganizationType](docs/models/OrganizationType.md)
 
 ## Documentation For Authorization
 
@@ -233,6 +214,7 @@ Class | Method | HTTP request | Description
 
 ## Author
 
+jonathan.addington@jmaddington.com
 jonathan.addington@jmaddington.com
 jonathan.addington@jmaddington.com
 
