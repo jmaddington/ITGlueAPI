@@ -207,10 +207,7 @@ paths:
           in: query
           required: false
           schema:
-            type: object
-            properties:
-              name:
-                type: string
+            $ref: '#/components/schemas/OrganizationStatus'
         - in: query
           name: sort
           description: "Comma separated values. To invert order use -, eg: -name"
