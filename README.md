@@ -1,7 +1,7 @@
 # IT Glue OpenAPI
 IT Glue's API in an OpenAPI (Swagger) Format.
 
-___This is a work in progress__
+__This is a work in progress__: I have not had time to test it all.
 
 It is generated with a combination of automation and manual work.
 
@@ -11,8 +11,8 @@ The generated python API is included.
 If you want to generate it again or output  a different language your options are to
 edit `generatepythonapi.yaml` and replace these lines with whatever you need:
 ```bash
-  -g python \
-  -o /local/python/api
+  -g {lang} \
+  -o /local/{lang}/api
 ```
 
 This script uses docker. However, the generator is also available with homebrew on macOS
